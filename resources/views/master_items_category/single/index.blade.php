@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="form-group mb-2">
                 <a href="{{url('master-items-category')}}" class="btn btn-secondary">Kembali ke Daftar Kategori</a>
+                <a href="{{url('master-items-category/export-pdf/' . $data->kode)}}" class="btn btn-danger">Export PDF</a>
             </div>
             <div class="card">
                 <div class="card-header">Master Item</div>

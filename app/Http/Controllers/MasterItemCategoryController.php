@@ -82,6 +82,25 @@ class MasterItemCategoryController extends Controller
     }
 
 
+    public function exportPdf($id)
+    {
+        $category = Category::with('masterItems')->findOrFail($id);
+        
+        $data = [
+            'category' => $category,
+            'items' => $category->masterItems,
+            'total_items' => $category->masterItems->count(),
+            'printed_at' => now()
+        ];
+        
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('master_items_category.single.pdf', $data);
+        
+        $pdf->setPaper('A4');
+        
+        return $pdf->download('kategori_' . $category->kode_category . '_' . date('Ymd_His') . '.pdf');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
