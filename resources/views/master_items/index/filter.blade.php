@@ -27,5 +27,8 @@
         </div>
     </div>
     <button class="btn btn-primary mt-1 btn-get-data">Filter</button>
+    <button type="button" class="btn btn-success" id="btn-export-excel" onclick="exportExcel()">
+        <i class="fas fa-file-excel"></i> Export Excel
+    </button>
     <span id="loading-filter" style="display: none;">Loading...</span>
 </div>

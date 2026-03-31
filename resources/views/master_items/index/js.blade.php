@@ -20,6 +20,25 @@
         getData()
     })
 
+    window.exportExcel = function() {
+        var filter_kode = $('#filter-kode').val();
+        var filter_nama = $('#filter-nama').val();
+        var filter_harga_min = $('#filter-harga-min').val();
+        var filter_harga_max = $('#filter-harga-max').val();
+        
+        // Build URL dengan parameter filter
+        var params = new URLSearchParams();
+        if (filter_kode) params.append('kode', filter_kode);
+        if (filter_nama) params.append('nama', filter_nama);
+        if (filter_harga_min) params.append('hargamin', filter_harga_min);
+        if (filter_harga_max) params.append('hargamax', filter_harga_max);
+        
+        var url = '{{ url("master-items/export-excel") }}?' + params.toString();
+        
+        // Redirect ke URL export
+        window.location.href = url;
+    };
+
     function getData(){
         
         $('#loading-filter').show();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\MasterItem;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Exports\MasterItemsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasterItemsController extends Controller
 {
@@ -145,5 +147,17 @@ class MasterItemsController extends Controller
         $array = ['Obat','Alkes','Matkes','Umum','ATK'];
         $random = rand(0,4);
         return $array[$random];
+    }
+
+    public function exportExcel(Request $request) 
+    {
+        $filters = [
+            'kode' => $request->input('kode'),
+            'nama' => $request->input('nama'),
+            'hargamin' => $request->input('hargamin'),
+            'hargamax' => $request->input('hargamax'),
+        ];
+        
+        return Excel::download(new MasterItemsExport($filters), 'master_items_' . date('Ymd_His') . '.xlsx');
     }
 }
