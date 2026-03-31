@@ -69,6 +69,19 @@ class MasterItemsController extends Controller
             $kode = $data_item->kode;
         }
 
+        if ($request->hasFile('foto')) {
+            if ($method != 'new' && $data_item->foto && file_exists(public_path('uploads/items/' . $data_item->foto))) {
+                unlink(public_path('uploads/items/' . $data_item->foto));
+            }
+            
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/items'), $filename);
+            $data_item->foto = $filename;
+        } elseif ($method != 'new') {
+            $data_item->foto = $data_item->foto;
+        }
+
         $data_item->nama = $request->nama;
         $data_item->harga_beli = $request->harga_beli;
         $data_item->laba = $request->laba;
@@ -84,7 +97,15 @@ class MasterItemsController extends Controller
 
     public function delete($id)
     {
-        MasterItem::find($id)->delete();
+
+        $item = MasterItem::find($id);
+        
+        if ($item->foto && file_exists(public_path('uploads/items/' . $item->foto))) {
+            unlink(public_path('uploads/items/' . $item->foto));
+        }
+        
+        $item->delete();
+
         return redirect('master-items');
     }
 
