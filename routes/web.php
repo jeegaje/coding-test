@@ -21,29 +21,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/master-items', [App\Http\Controllers\MasterItemsController::class, 'index']);
 Route::get('/master-items/search', [App\Http\Controllers\MasterItemsController::class, 'search']);
 Route::get('/master-items/form/{method}/{id?}', [App\Http\Controllers\MasterItemsController::class, 'formView']);
 Route::post('/master-items/form/{method}/{id?}', [App\Http\Controllers\MasterItemsController::class, 'formSubmit']);
-
 Route::get('/master-items/view/{kode}', [App\Http\Controllers\MasterItemsController::class, 'singleView']);
 Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsController::class, 'delete']);
-
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);
-
-
 Route::get('/master-items/export-excel', [App\Http\Controllers\MasterItemsController::class, 'exportExcel']);
-
-
-
-
 
 Route::get('/master-items-category', [App\Http\Controllers\MasterItemCategoryController::class, 'index']);
 Route::get('/master-items-category/search', [App\Http\Controllers\MasterItemCategoryController::class, 'search']);
 Route::get('/master-items-category/form/{method}/{id?}', [App\Http\Controllers\MasterItemCategoryController::class, 'formView']);
 Route::post('/master-items-category/form/{method}/{id?}', [App\Http\Controllers\MasterItemCategoryController::class, 'formSubmit']);
-
 Route::get('/master-items-category/view/{kode}', [App\Http\Controllers\MasterItemCategoryController::class, 'singleView']);
 Route::get('/master-items-category/delete/{id}', [App\Http\Controllers\MasterItemCategoryController::class, 'delete']);
-
 Route::get('/master-items-category/export-pdf/{kode}', [App\Http\Controllers\MasterItemCategoryController::class, 'exportPdf']);
