@@ -18,6 +18,17 @@
                             <td>{{$data->nama}}</td>
                         </tr>
                         <tr>
+                            <th>Kategori</th>
+                            <td>:</td>
+                            <td>
+                                @if($data->categories)
+                                    {{ $data->categories->pluck('nama')->join(', ') }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Harga Beli</th>
                             <td>:</td>
                             <td>{{$data->harga_beli}}</td>

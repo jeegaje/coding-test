@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterItem;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class MasterItemsController extends Controller
@@ -36,6 +37,8 @@ class MasterItemsController extends Controller
 
     public function formView($method, $id = 0)
     {
+        $categories = Category::all();
+
         if ($method == 'new') {
             $item = [];
         } else {
@@ -43,6 +46,7 @@ class MasterItemsController extends Controller
         }
         $data['item'] = $item;
         $data['method'] = $method;
+        $data['categories'] = $categories;
         return view('master_items.form.index', $data);
     }
 
@@ -72,6 +76,8 @@ class MasterItemsController extends Controller
         $data_item->supplier = $request->supplier;
         $data_item->jenis = $request->jenis;
         $data_item->save();
+
+        $data_item->categories()->sync($request->categories);
 
         return redirect('master-items');
     }

@@ -10,4 +10,12 @@ class MasterItem extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'master_item_categories')
+                    ->withTimestamps();
+    }
+
+
 }

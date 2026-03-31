@@ -13,6 +13,26 @@
     </div>
 
     <div class="form-group">
+        <label>Kategori (bisa pilih lebih dari satu)</label>
+        <div class="row">
+        @foreach($categories as $category)
+            <div class="col-md-4 mb-2">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" 
+                               name="categories[]" 
+                               value="{{$category->id}}"
+                               @if($item && !is_array($item) && $item->categories && $item->categories->contains($category->id)) 
+                                   checked 
+                               @endif>
+                        {{$category->nama}}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
         <label>Harga Beli</label>
         <input type="number" class="form-control" name="harga_beli" required  value="{{$item->harga_beli ?? ''}}">
     </div>
